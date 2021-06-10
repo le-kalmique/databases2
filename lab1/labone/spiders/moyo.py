@@ -9,7 +9,9 @@ class MoyoSpider(scrapy.Spider):
     start_urls = ['https://www.moyo.ua/detskij_mir/igrushki/konstruktory/?filters=3967_355236,355245&brands=lego']
 
     def parse(self, response: Response):
-        products = response.xpath("//section[contains(@class, 'product-tile_product')]")[:20]
+        pages_num = 20
+
+        products = response.xpath("//section[contains(@class, 'product-tile_product')]")[:pages_num]
         for product in products:
             yield {
                 'description': product.xpath("./@data-name").get(),

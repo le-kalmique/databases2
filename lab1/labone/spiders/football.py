@@ -9,6 +9,8 @@ class FootballSpider(scrapy.Spider):
     start_urls = ['https://football.ua/galleries/']
 
     def parse(self, response: Response):
+        pages_num = 20
+
         all_images = response.xpath("//img/@src[starts-with(., 'http')]")
         all_text = response.xpath(
             "//*[not(self::script)][not(self::style)][string-length(normalize-space(text())) > 30]/text()")
@@ -20,6 +22,6 @@ class FootballSpider(scrapy.Spider):
         if response.url == self.start_urls[0]:
             all_links = response.xpath(
                 "//a/@href[starts-with(., 'https://football.ua/')][substring(., string-length() - 4) = '.html']")
-            selected_links = [link.get() for link in all_links][:19]
+            selected_links = [link.get() for link in all_links][:pages_num]
             for link in selected_links:
                 yield scrapy.Request(link, self.parse)
