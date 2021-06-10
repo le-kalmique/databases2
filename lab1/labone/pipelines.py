@@ -12,10 +12,18 @@ class LabonePipeline(object):
         self.root = None
 
     def open_spider(self, spider):
-        self.root = etree.Element("data" if spider.name == "football" else "shop")
+        if (spider.name == "football"):
+            element = "data"
+        else:
+            element = "internet_shop"
+        self.root = etree.Element(element)
 
     def close_spider(self, spider):
-        with open('task%d.xml' % (1 if spider.name == "football" else 2), 'wb') as f:
+        if (spider.name == "football"):
+            task = 1
+        else:
+            task = 2
+        with open(f'task{task}.xml', 'wb') as f:
             f.write(etree.tostring(self.root, encoding="UTF-8", pretty_print=True, xml_declaration=True))
 
     def process_item(self, item, spider):
