@@ -103,7 +103,6 @@ def user_menu() -> int:
     print("2. Inbox")
     print("3. Create message")
     print("4. Statistics")
-    print("0. Exit")
     return int(input(":: "))
 
 def is_user_signed_in(current_user_id):
@@ -133,10 +132,8 @@ def user_menu_flow(c, current_user_id):
 
         elif choice == 4:
             current_user = c.hmget(f"user:{current_user_id}", ['queue', 'checking', 'blocked', 'sent', 'delivered'])
-            print("In queue: %s\nChecking: %s\nBlocked: %s\nSent: %s\nDelivered: %s".format(tuple(current_user)))
+            print("In queue: %s\tChecking: %s\tBlocked: %s\tSent: %s\tDelivered: %s" % tuple(current_user))
 
-        elif choice == 0:
-            break
 
 
 def main():
