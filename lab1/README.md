@@ -1,5 +1,6 @@
 # Lab 1
-## Dzherhalova Renata, KP-82
+## Вивчення базових операцій обробки XML-документів 
+## Dzherhalova Renata, KP-82, №5
 
 ### Task 1
 
